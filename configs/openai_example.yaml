@@ -1,0 +1,27 @@
+prompt_set_path: data/prompts/demo_prompts.json
+output_dir: outputs
+result_name: openai_apst_results
+
+models:
+  - name: gpt-4o-mini
+    model_id: gpt-4o-mini
+    provider: openai
+    max_tokens: 512
+
+judge_mode: llm
+judge_model:
+  name: gpt-4o-mini-judge
+  model_id: gpt-4o-mini
+  provider: openai
+  max_tokens: 256
+
+temperatures: [0.0, 0.7]
+n_samples_per_prompt: 5
+max_prompts: 3
+max_tokens_per_response: 512
+apst_risk_horizon: 10
+max_workers: 1
+batch_size: 5
+delay_between_batches: 0.0
+save_raw_responses: true
+save_classifications: true

@@ -1,0 +1,24 @@
+prompt_set_path: data/prompts/demo_prompts.json
+output_dir: outputs
+result_name: local_llm_apst_results
+
+models:
+  - name: local-openai-compatible
+    model_id: llama3.1
+    provider: openai_compatible
+    base_url: http://localhost:11434/v1
+    api_key: local-not-needed
+    max_tokens: 512
+
+judge_mode: rule
+
+temperatures: [0.0, 0.7]
+n_samples_per_prompt: 5
+max_prompts: 3
+max_tokens_per_response: 512
+apst_risk_horizon: 10
+max_workers: 1
+batch_size: 5
+delay_between_batches: 0.0
+save_raw_responses: true
+save_classifications: true

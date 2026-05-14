@@ -1,0 +1,25 @@
+prompt_set_path: data/prompts/example_prompts.json
+output_dir: data/results
+
+models:
+  - name: gpt-4o-mini
+    model_id: gpt-4o-mini
+    provider: openai
+    max_tokens: 512
+
+judge_model:
+  name: gpt-4o-mini-judge
+  model_id: gpt-4o-mini
+  provider: openai
+  max_tokens: 256
+
+temperatures: [0.0]
+n_samples_per_prompt: 1
+max_prompts: 2
+max_tokens_per_response: 512
+max_workers: 1
+batch_size: 5
+delay_between_batches: 0.0
+save_raw_responses: true
+save_classifications: true
+

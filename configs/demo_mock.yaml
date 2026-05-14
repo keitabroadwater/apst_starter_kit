@@ -1,0 +1,22 @@
+prompt_set_path: data/prompts/demo_prompts.json
+output_dir: outputs
+result_name: demo_results
+
+models:
+  - name: mock-apst-model
+    model_id: mock-apst-model
+    provider: mock
+    max_tokens: 256
+
+judge_mode: rule
+
+temperatures: [0.0, 0.7]
+n_samples_per_prompt: 4
+max_prompts: 3
+max_tokens_per_response: 256
+apst_risk_horizon: 10
+max_workers: 1
+batch_size: 4
+delay_between_batches: 0.0
+save_raw_responses: true
+save_classifications: true
