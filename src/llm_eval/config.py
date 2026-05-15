@@ -178,15 +178,33 @@ def _load_mapping(path: Path) -> dict[str, Any]:
 def _model_config_from_dict(data: dict[str, Any]) -> ModelConfig:
     if not isinstance(data, dict):
         raise TypeError("Model config entries must be mappings")
+    model_id = _model_id_from_dict(data)
+    provider = _provider_from_dict(data)
     return ModelConfig(
-        name=str(data["name"]),
-        model_id=str(data.get("model_id", data["name"])),
-        provider=str(data["provider"]).lower(),
+        name=str(data.get("name", model_id)),
+        model_id=model_id,
+        provider=provider,
         api_key=data.get("api_key"),
         base_url=data.get("base_url"),
         max_tokens=_optional_int(data.get("max_tokens")),
         extra_params=dict(data.get("extra_params", {})),
     )
+
+
+def _model_id_from_dict(data: dict[str, Any]) -> str:
+    model_id = data.get("model_id", data.get("model", data.get("name")))
+    if model_id is None:
+        raise KeyError("Model config entries require one of: model_id, model, name")
+    return str(model_id)
+
+
+def _provider_from_dict(data: dict[str, Any]) -> str:
+    provider = data.get("provider")
+    if provider is None and data.get("base_url"):
+        provider = "openai_compatible"
+    if provider is None:
+        raise KeyError("Model config entries require provider unless base_url is set")
+    return str(provider).lower()
 
 
 def _optional_int(value: Any) -> int | None:

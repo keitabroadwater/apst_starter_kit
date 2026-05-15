@@ -1,9 +1,9 @@
 prompt_set_path: data/prompts/demo_prompts.json
 output_dir: outputs
-result_name: local_llm_apst_results
+result_name: ollama_local_apst_results
 
 models:
-  - model: llama3.1
+  - model: llama3.2:1b
     base_url: http://localhost:11434/v1
     api_key: local-not-needed
     max_tokens: 512

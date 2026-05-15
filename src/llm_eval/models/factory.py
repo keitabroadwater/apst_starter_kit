@@ -9,6 +9,14 @@ from llm_eval.models.mock_client import MockModelRunner
 from llm_eval.models.openai_client import OpenAIModelRunner
 from llm_eval.models.together_client import TogetherModelRunner
 
+OPENAI_COMPATIBLE_PROVIDERS = {
+    "openai_compatible",
+    "openai-compatible",
+    "local",
+    "ollama",
+    "vllm",
+}
+
 
 def infer_provider(model_id: str) -> str:
     if model_id.lower().startswith("mock"):
@@ -29,7 +37,17 @@ def create_model_runner(
     provider = config.provider.lower()
     if provider in {"mock", "demo"}:
         return MockModelRunner(config.model_id)
-    if provider in {"openai", "openai_compatible", "openai-compatible", "local"}:
+    if provider in OPENAI_COMPATIBLE_PROVIDERS and not config.base_url:
+        raise ValueError(f"Provider {config.provider!r} requires base_url")
+    if provider in OPENAI_COMPATIBLE_PROVIDERS:
+        return OpenAIModelRunner(
+            config.model_id,
+            api_key=config.api_key,
+            base_url=config.base_url,
+            max_retries=max_retries,
+            retry_delay=retry_delay,
+        )
+    if provider == "openai":
         return OpenAIModelRunner(
             config.model_id,
             api_key=config.api_key,

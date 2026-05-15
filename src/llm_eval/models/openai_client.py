@@ -27,7 +27,7 @@ class OpenAIModelRunner(ModelRunner):
         try:
             from openai import OpenAI
         except ImportError as exc:
-            raise RuntimeError("Install OpenAI support with: pip install -e '.[providers]'") from exc
+            raise RuntimeError("Install OpenAI-compatible client support with: pip install openai") from exc
 
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.max_retries = max_retries
@@ -92,4 +92,3 @@ def _extract_text(content: Any) -> str:
                     parts.append(text)
         return "\n".join(part.strip() for part in parts if part and part.strip())
     return str(content).strip()
-

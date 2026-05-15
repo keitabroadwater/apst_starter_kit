@@ -1,14 +1,19 @@
 prompt_set_path: data/prompts/demo_prompts.json
 output_dir: outputs
-result_name: local_llm_apst_results
+result_name: openai_apst_results
 
 models:
-  - model: llama3.1
-    base_url: http://localhost:11434/v1
-    api_key: local-not-needed
+  - name: gpt-4o-mini
+    model_id: gpt-4o-mini
+    provider: openai
     max_tokens: 512
 
-judge_mode: rule
+judge_mode: llm
+judge_model:
+  name: gpt-4o-mini-judge
+  model_id: gpt-4o-mini
+  provider: openai
+  max_tokens: 256
 
 temperatures: [0.0, 0.7]
 n_samples_per_prompt: 5

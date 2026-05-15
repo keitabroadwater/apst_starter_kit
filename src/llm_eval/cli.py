@@ -14,6 +14,7 @@ from llm_eval.experiments.apst import run_apst
 from llm_eval.experiments.compare import compare_results
 from llm_eval.models.pricing import estimate_experiment_cost
 from llm_eval.report import generate_report
+from llm_eval.starter import init_starter_workspace
 
 
 def main() -> None:
@@ -28,6 +29,7 @@ def main() -> None:
     _add_freeze_airbench(subparsers)
     _add_compare(subparsers)
     _add_estimate_cost(subparsers)
+    _add_init(subparsers)
 
     args = parser.parse_args()
     logging.basicConfig(
@@ -76,6 +78,10 @@ def main() -> None:
             judge_model=args.judge_model,
         )
         print(json.dumps(estimate, indent=2))
+    elif args.command == "init":
+        target = init_starter_workspace(args.directory, force=args.force)
+        print(f"Initialized APST starter workspace at {target}")
+        print("Next: cd into that directory and run `apst run --config configs/demo_mock.yaml`")
 
 
 def _add_run(subparsers) -> None:
@@ -143,6 +149,15 @@ def _add_estimate_cost(subparsers) -> None:
     parser.add_argument("--n-temperatures", type=int, required=True)
     parser.add_argument("--n-samples", type=int, required=True)
     parser.add_argument("--judge-model", default="gpt-4o-mini")
+
+
+def _add_init(subparsers) -> None:
+    parser = subparsers.add_parser(
+        "init",
+        help="Create a runnable APST starter workspace from the packaged template",
+    )
+    parser.add_argument("directory", nargs="?", default="apst-starter-workspace")
+    parser.add_argument("--force", action="store_true", help="Overwrite existing starter files")
 
 
 def _config_with_overrides(args):
