@@ -4,9 +4,32 @@ APST stands for Accelerated Prompt Stress Testing. It is a depth-oriented LLM sa
 reliability evaluation workflow that repeatedly samples the same prompts under controlled
 conditions to estimate empirical failure probability under repeated inference.
 
-This v0.1 starter kit is local-first and conference-friendly. You can run the mock demo without
+This v0.1 starter kit is local-first. You can run the mock demo without
 an API key, then swap in OpenAI, Together.ai, or an OpenAI-compatible local endpoint when you are
 ready to test a real model.
+
+## Research Background
+
+This starter kit is based on the Accelerated Prompt Stress Testing (APST) research introduced by Keita Broadwater.
+
+APST is a depth-oriented evaluation framework for LLM safety and reliability. Instead of evaluating a model once per prompt, APST repeatedly samples identical or near-identical prompts under controlled operational conditions, then estimates empirical failure probability under repeated inference. This helps surface deployment-relevant risks such as refusal inconsistency, unsafe completions, hallucinations, and reliability gaps that may be hidden by shallow or low-sample benchmark evaluation.
+
+The starter kit is intended to make the APST workflow easier to try locally: repeated prompt sampling, judging, empirical failure-rate estimation, operational risk projection, and report generation.
+
+## Related Papers
+
+### Evaluating LLM Safety Under Repeated Inference via Accelerated Prompt Stress Testing (presented at CCAI 2026)
+### Evaluating Reliability Gaps in Large Language Model Safety via Repeated Prompt Sampling (extended version)
+
+
+These papers introduce Accelerated Prompt Stress Testing (APST) as a depth-oriented framework for evaluating LLM safety under repeated inference. APST repeatedly samples prompts under controlled conditions, such as decoding temperature, and models observed failures as stochastic outcomes using Bernoulli and binomial formulations. The paper shows that models with similar shallow-evaluation scores can exhibit meaningfully different empirical failure rates under repeated sampling. 
+
+- arXiv: https://arxiv.org/abs/2602.11786
+- DOI: https://doi.org/10.48550/arXiv.2602.11786
+
+- arXiv: https://arxiv.org/abs/2604.09606
+- DOI: https://doi.org/10.48550/arXiv.2604.09606
+
 
 ## Quickstart
 
