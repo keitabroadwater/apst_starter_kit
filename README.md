@@ -1,35 +1,48 @@
 # APST Starter Kit
 
-APST stands for Accelerated Prompt Stress Testing. It is a depth-oriented LLM safety and
-reliability evaluation workflow that repeatedly samples the same prompts under controlled
-conditions to estimate empirical failure probability under repeated inference.
+APST stands for **Accelerated Prompt Stress Testing**. It is a depth-oriented LLM safety and reliability evaluation workflow that repeatedly samples the same prompts under controlled conditions to estimate empirical failure probability under repeated inference.
 
-This v0.1 starter kit is local-first. You can run the mock demo without
-an API key, then swap in OpenAI, Together.ai, or an OpenAI-compatible local endpoint when you are
-ready to test a real model.
+This v0.1 starter kit is local-first. You can run the mock demo without an API key, then swap in OpenAI, Together.ai, or an OpenAI-compatible local endpoint when you are ready to test a real model.
 
 ## Research Background
 
 This starter kit is based on the Accelerated Prompt Stress Testing (APST) research introduced by Keita Broadwater.
 
-APST is a depth-oriented evaluation framework for LLM safety and reliability. Instead of evaluating a model once per prompt, APST repeatedly samples identical or near-identical prompts under controlled operational conditions, then estimates empirical failure probability under repeated inference. This helps surface deployment-relevant risks such as refusal inconsistency, unsafe completions, hallucinations, and reliability gaps that may be hidden by shallow or low-sample benchmark evaluation.
+APST is a depth-oriented evaluation framework for LLM safety and reliability. Instead of evaluating a model once per prompt, APST repeatedly samples identical or near-identical prompts under controlled operational conditions, then estimates empirical failure probability under repeated inference.
 
-The starter kit is intended to make the APST workflow easier to try locally: repeated prompt sampling, judging, empirical failure-rate estimation, operational risk projection, and report generation.
+This helps surface deployment-relevant risks such as refusal inconsistency, unsafe completions, hallucinations, and reliability gaps that may be hidden by shallow or low-sample benchmark evaluation.
+
+The starter kit is intended to make the APST workflow easier to try locally:
+
+- repeated prompt sampling;
+- judging;
+- empirical failure-rate estimation;
+- operational risk projection;
+- English, Chinese, and bilingual report generation.
 
 ## Related Papers
 
-### Evaluating LLM Safety Under Repeated Inference via Accelerated Prompt Stress Testing (presented at CCAI 2026)
-### Evaluating Reliability Gaps in Large Language Model Safety via Repeated Prompt Sampling (extended version)
+### Evaluating LLM Safety Under Repeated Inference via Accelerated Prompt Stress Testing
 
-
-These papers introduce Accelerated Prompt Stress Testing (APST) as a depth-oriented framework for evaluating LLM safety under repeated inference. APST repeatedly samples prompts under controlled conditions, such as decoding temperature, and models observed failures as stochastic outcomes using Bernoulli and binomial formulations. The paper shows that models with similar shallow-evaluation scores can exhibit meaningfully different empirical failure rates under repeated sampling. 
+This is the primary APST paper. It introduces Accelerated Prompt Stress Testing as a depth-oriented framework for evaluating LLM safety under repeated inference. APST repeatedly samples prompts under controlled conditions, such as decoding temperature, and models observed failures as stochastic outcomes using Bernoulli and binomial formulations. The paper shows that models with similar shallow-evaluation scores can exhibit meaningfully different empirical failure rates under repeated sampling.
 
 - arXiv: https://arxiv.org/abs/2602.11786
 - DOI: https://doi.org/10.48550/arXiv.2602.11786
 
+### Evaluating Reliability Gaps in Large Language Model Safety via Repeated Prompt Sampling
+
+This conference paper presents APST through the lens of reliability gaps in LLM safety evaluation and was accepted at CCAI 2026. It contrasts breadth-oriented safety benchmarks with depth-oriented repeated sampling and emphasizes operational failures that emerge under repeated use.
+
 - arXiv: https://arxiv.org/abs/2604.09606
 - DOI: https://doi.org/10.48550/arXiv.2604.09606
 
+## How This Starter Kit Relates to the Papers
+
+The APST Starter Kit is a practical, local-first implementation inspired by the APST papers above. It is designed for researchers, practitioners, and enterprise AI teams who want to experiment with the core APST workflow on their own machines.
+
+This repository is not a full reproduction package for every experiment in the papers. Instead, it provides a lightweight starting point for running APST-style evaluations locally, generating reports, and adapting the workflow to research, enterprise, or deployment-readiness contexts.
+
+For full-scale APST studies, users should carefully control prompt selection, model configuration, judge configuration, sample depth, temperature, language, and reporting assumptions.
 
 ## Quickstart
 
